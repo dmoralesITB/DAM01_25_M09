@@ -120,19 +120,85 @@
             return media.toFixed(1);
         }
 
-        // Ejercicio 5
-        function esNumeroCubo(num) {
-            let sumaCubos = 0;
-            let numStr = num.toString();
-            for (let i = 0; i < numStr.length; i++) {
-                let cifra = parseInt(numStr[i]);
-                sumaCubos += Math.pow(cifra, 3);
+        //ejercicio 5
+        function encontrarNumerosArmstrong() {
+            console.log("Buscando números que cumplen la propiedad...");
+
+            for (let i = 1; i <= 10000; i++) {
+                let sumaCubos = 0;
+                let numActual = i;
+
+                // Mientras queden dígitos por procesar
+                while (numActual > 0) {
+                    let digito = numActual % 10; // Obtenemos el último dígito
+
+                    // Calculamos el cubo: (digito * digito) * digito
+                    // Usamos tu función multiplicarPorSuma
+                    let cuadrado = multiplicarPorSuma(digito, digito);
+                    let cubo = multiplicarPorSuma(cuadrado, digito);
+
+                    sumaCubos += cubo;
+
+                    numActual = (numActual / 10) | 0;
+                }
+                // Si la suma de los cubos es igual al número original
+                if (sumaCubos === i) {
+                    console.log("El número " + i + " cumple la propiedad.");
+                }
             }
-            return sumaCubos === num;
+        }
+        // function moduloCalculo() {
+        //     let resultado = 0;
+        //     let resto = 0;
+        //     let div = 0;
+        //     for (let i = 1; i < 10000; i++) {
+        //         resultado = calculoSumaPotencias(i);
+        //         if (resultado == i) {
+        //             console.log("Bingo: " + resultado)
+        //         }
+        //         resultado = 0;
+        //     }
+        // }
+        // function calculoSumaPotencias(div) {
+        //     let resto = 0;
+        //     let resultado = 0;
+        //     div = i;
+        //     while (div >= 9) {
+        //         resto = div % 10;
+        //         div = parseInt(div / 10)
+        //         resultado += resto * resto * resto
+        //     }
+        //     resultado +=
+        // }
+
+        //Ejercicio 6
+        function sumaCubos() {
+            for (let i = 1; i <= 10000; i++) {
+                let suma = 0;
+                let num = i;
+
+                while (num > 0) {
+                    let modulo = num % 10;
+
+                    // Calculamos el cubo usando tu función multiplicarPorSuma
+                    // Un cubo es: (n * n) * n
+                    let cuadrado = multiplicarPorSuma(modulo, modulo);
+                    let cubo = multiplicarPorSuma(cuadrado, modulo);
+
+                    suma = suma + cubo;
+
+                    // Quitamos el último dígito 
+                    num = (num / 10) | 0;
+                }
+
+                if (suma === i) {
+                    console.log("Encontrado: " + i);
+                }
+            }
         }
 
 
-        //ejercicio6
+        //ejercicio6 alternativa
         function cuboNumero(num) {
             const divRes6 = document.getElementById("res6");
 
@@ -187,23 +253,8 @@
         cuboNumero(3);      // Caso correcto: 27
         cuboNumero(2.5);    // Caso error: No es entero
         cuboNumero("hola"); // Caso error: No es número
-
-
-        // alternativa ejercicio 5 
-        function sumaCubos() {
-            for (let i = 1; i <= 10000; i++) {
-                let modulo = num % 10;
-                num = num / 10;
-                resultado = multiplica(num, num)
-
-                let modulo = num % 10;
-                num = num / 10;
-
-            }
-        }
     </script>
 </body>
-
 
 
 </html>
