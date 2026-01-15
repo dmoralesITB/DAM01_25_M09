@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios- Tipo Numbers</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .ejercicio {
+            border: 1px black solid;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .resultado {
+            background-color: rgb(195, 192, 192);
+            padding: 10px;
+            min-height: 20px;
+            white-space: pre-line;
+            /* Para que los saltos de línea se vean */
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1 id="titulo">Ejercicios - Tipo Numbers</h1>
+
+    <div class="ejercicio">
+        <h3>Ejercicio 1: Número Mayor</h3>
+        <p>Función que indica cuál de los dos números pasados por parámetros es mayor.</p>
+        <div id="res1" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio 2: Multiplicación por Suma</h3>
+        <p>Función que multiplica dos números sumando el primero tantas veces como indique el segundo.</p>
+        <div id="res2" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio 3: Multiplicación de Tres Números</h3>
+        <p>Función que multiplica tres números reutilizando la función de suma anterior.</p>
+        <div id="res3" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio 4: Nota Media</h3>
+        <p>Función que calcula la media aritmética de tres notas.</p>
+        <div id="res4" class="resultado"></div>
+    </div>
+
+    <div class="ejercicio">
+        <h3>Ejercicio 5: Números Cubo</h3>
+        <p>Identifica números del 1 al 10.000 cuya suma de los cubos de sus dígitos es igual al número mismo.</p>
+        <div id="res5" class="resultado"></div>
+    </div>
+    <div class="ejercicio">
+        <h3>Ejercicio 6: Cubo de un Número Entero</h3>
+        <p>Función que devuelve el cubo de un número si es un entero, o muestra un alert si no lo es.</p>
+        <div id="res6" class="resultado"></div>
+    </div>
+
+    <script>
+
+        // Ejercicio 1 
+        function mayorNumero(a, b) {
+            const divRes1 = document.getElementById("res1");
+            if (a > b) {
+                divRes1.innerText += `El número mayor entre ${a} y ${b} es: ${a}\n`;
+            } else if (b > a) {
+                divRes1.innerText += `El número mayor entre ${a} y ${b} es: ${b}\n`;
+            } else {
+                divRes1.innerText += `Los números ${a} y ${b} son iguales.\n`;
+            }
+        }
+        // function mayorNumero(num1, num2) {
+        //     if (num1 < num2) {
+        //         return num2;
+        //     } else {
+        //         return num1;
+        //     }
+        // }
+
+
+        //buena practica
+        //  if(num1>num2) {
+        //      return num1
+        // };
+        //      return num2;
+
+
+        // Ejercicio 2
+        function multiplicacionPorSuma(num1, num2) {
+            let resultado = 0;
+            for (let i = 0; i < num2; i++) {
+                resultado += num1;
+            }
+            return resultado;
+        }
+
+        // Ejercicio 3 
+        function multiplicacionDeTresNumeros(a, b, c) {
+            let productoABC = multiplicacionPorSuma(multiplicacionPorSuma(a, b), c);
+            return productoABC;
+        }
+
+        // Ejercicio 4 con un solo decimal
+        function notaMedia(nota1, nota2, nota3) {
+            let suma = nota1 + nota2 + nota3;
+            let media = suma / 3;
+            return media.toFixed(1);
+        }
+
+        // Ejercicio 5
+        function esNumeroCubo(num) {
+            let sumaCubos = 0;
+            let numStr = num.toString();
+            for (let i = 0; i < numStr.length; i++) {
+                let cifra = parseInt(numStr[i]);
+                sumaCubos += Math.pow(cifra, 3);
+            }
+            return sumaCubos === num;
+        }
+
+
+        //ejercicio6
+        function cuboNumero(num) {
+            const divRes6 = document.getElementById("res6");
+
+            // 1. Validar si es un número y no es NaN
+            if (typeof num !== 'number' || isNaN(num)) {
+                alert("Error: El parámetro '" + num + "' no es un número.");
+                divRes6.innerText += "Error: '" + num + "' no es un número.\n";
+                return false;
+            }
+
+            // 2. Validar si es entero
+            if (!Number.isInteger(num)) {
+                alert("Error: El número " + num + " no es un entero.");
+                divRes6.innerText += "Error: " + num + " no es entero.\n";
+                return false;
+            }
+
+            // 3. Calcular cubo y mostrar en el HTML
+            let resultado = Math.pow(num, 3);
+            divRes6.innerText += "El cubo de " + num + " es: " + resultado + "\n";
+            return resultado;
+        }
+
+        // Ejecutar Ejercicio 1 
+        const num1 = 2;
+        const num2 = 5;
+        mayorNumero(num1, num2);
+
+
+        // Ejecutar Ejercicio 2
+        const r2 = multiplicacionPorSuma(5, 3);
+        document.getElementById("res2").innerText = "Resultado de 5 * 3: " + r2;
+
+        // Ejecutar Ejercicio 3
+        const r3 = multiplicacionDeTresNumeros(2, 3, 4);
+        document.getElementById("res3").innerText = "Resultado de 2 * 3 * 4: " + r3;
+
+        // Ejecutar Ejercicio 4
+        const r4 = notaMedia(7, 7, 9);
+        document.getElementById("res4").innerText = "La media de 7, 7 y 9 es: " + r4;
+
+        // Ejecutar Ejercicio 5
+        let hallados = [];
+        for (let i = 1; i <= 10000; i++) {
+            if (esNumeroCubo(i)) {
+                hallados.push(i);
+            }
+        }
+        document.getElementById("res5").innerText = "Números encontrados: " + hallados.join(", ");
+
+        // Ejecutar Ejercicio 6
+        cuboNumero(3);      // Caso correcto: 27
+        cuboNumero(2.5);    // Caso error: No es entero
+        cuboNumero("hola"); // Caso error: No es número
+
+
+        // alternativa ejercicio 5 
+        function sumaCubos() {
+            for (let i = 1; i <= 10000; i++) {
+                let modulo = num % 10;
+                num = num / 10;
+                resultado = multiplica(num, num)
+
+                let modulo = num % 10;
+                num = num / 10;
+
+            }
+        }
+    </script>
+</body>
+
+
+
+</html>
