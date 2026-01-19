@@ -99,7 +99,9 @@
                 const anyo = coche[2];
                 return marca !== "Alfa Romeo" && marca !== "Kia" && (anyoActual - anyo) > 20;
             })
+
             .sort((a, b) => b[3] - a[3])
+            
             .map(coche => {
                 return [coche[0], coche[1], coche[2], coche[3] * 0.8];
             });
