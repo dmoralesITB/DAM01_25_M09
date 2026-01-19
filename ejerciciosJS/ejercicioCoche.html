@@ -1,24 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Coches</title>
+    <title>Ejercicios</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
-        #lista-coches { border-top: 2px solid #000000; margin-top: 10px; }
-        .coche-item { padding: 10px; border-bottom: 1px solid #ffffff; }
-        .marca { font-weight: bold; color: #2c3e50; }
-        .precio { color: #fd1900; font-weight: bold; }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        #lista-coches {
+            border-top: 2px solid #000000;
+            margin-top: 10px;
+        }
+
+        .coche-item {
+            padding: 10px;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .marca {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .precio {
+            color: #fd1900;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
-    <p>Lista Vehiculos</p> 
+    <p>Lista Vehiculos</p>
     <p>Filtrado sin Kia ni Alfa Romeo, de más de 20 años</p>
-    
+
     <div id="lista-coches"></div>
 
+    <h2>Resultados del Cálculo de Notas</h2>
+    <div id="pantalla" class="resultado"></div>
+
     <script>
+
+        //Ejercicio Notas
+        let notas = [3.4, 7.9, 8.0, 2.5, 5.6, 5.4, 9.0];
+
+        // Calcular la nota media (usando reduce)
+        let sumaTotal = notas.reduce((acumulador, nota) => acumulador + nota, 0);
+        let media = (sumaTotal / notas.length).toFixed(2);
+
+        //  Obtener la primera nota superior a 5 (usando find)
+        let primeraAprobada = notas.find(nota => nota > 5);
+
+        // Cambiar notas de base 10 a base 20 (usando map)
+        let notasSobre20 = notas.map(nota => nota * 2);
+
+        // Mostrar en el DIV
+        const pantalla = document.getElementById("pantalla");
+        pantalla.innerHTML = `
+            <p><b>Nota media:</b> ${media}</p>
+            <p><b>Primera nota superior a 5:</b> ${primeraAprobada}</p>
+            <p><b>Notas originales:</b> [${notas.join(", ")}]</p>
+        `;
+        //<p><b>Notas sobre 20:</b> [${notasSobre20.join(", ")}]</p>
+
+
+        //ejercicio coche
         let coches = [
             ["seat", "Codoba", 1997, 10000],
             ["Kia", "Sorento", 1994, 1000],
@@ -61,15 +111,16 @@
         resultado.forEach(coche => {
             const divCoche = document.createElement("div");
             divCoche.className = "coche-item";
-            
+
             divCoche.innerHTML = `
                 <span class="marca">${coche[0].toUpperCase()} ${coche[1]}</span> | 
                 Año: ${coche[2]} | 
                 Precio Rebajado: <span class="precio">${coche[3].toFixed(2)}€</span>
             `;
-            
+
             contenedor.appendChild(divCoche);
         });
     </script>
 </body>
+
 </html>
