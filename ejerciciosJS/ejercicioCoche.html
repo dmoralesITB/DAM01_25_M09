@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Coches</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        #lista-coches { border-top: 2px solid #000000; margin-top: 10px; }
+        .coche-item { padding: 10px; border-bottom: 1px solid #ffffff; }
+        .marca { font-weight: bold; color: #2c3e50; }
+        .precio { color: #fd1900; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <p>Lista Vehiculos</p> 
+    <p>Filtrado sin Kia ni Alfa Romeo, de más de 20 años</p>
+    
+    <div id="lista-coches"></div>
+
+    <script>
+        let coches = [
+            ["seat", "Codoba", 1997, 10000],
+            ["Kia", "Sorento", 1994, 1000],
+            ["seat", "Todelo", 2000, 10000],
+            ["Fiat", "Bravo", 2010, 10200],
+            ["Fiat", "500", 2010, 10000],
+            ["Mercedes", "Calse B", 2001, 39000],
+            ["seat", "Ibiza", 1993, 10100],
+            ["Alfa Romeo", "Julieta", 2002, 10000],
+            ["Alfa Romeo", "159", 2002, 10400],
+            ["Mercedes", "Calse C", 2001, 1000],
+            ["Alfa Romeo", "147", 1990, 10500],
+            ["Fiat", "Punto", 1990, 999],
+            ["Citroen", "Saxo", 1980, 10300],
+            ["Renault", "Superc 5", 1980, 12000],
+            ["BWM", "M3", 2020, 1000],
+            ["Kia", "Picanto", 1990, 1000],
+            ["Alfa Romeo", "spider", 1970, 14500],
+            ["Mercedes", "Calse A", 1994, 60100],
+            ["Mercedes", "Calse D", 2011, 21221]
+        ];
+
+        const anyoActual = 2026;
+
+        let resultado = coches
+            .filter(coche => {
+                const marca = coche[0];
+                const anyo = coche[2];
+                return marca !== "Alfa Romeo" && marca !== "Kia" && (anyoActual - anyo) > 20;
+            })
+            .sort((a, b) => b[3] - a[3])
+            .map(coche => {
+                return [coche[0], coche[1], coche[2], coche[3] * 0.8];
+            });
+
+        // Contenedor DIV 
+        const contenedor = document.getElementById("lista-coches");
+
+        // el resultado y generamos el HTML
+        resultado.forEach(coche => {
+            const divCoche = document.createElement("div");
+            divCoche.className = "coche-item";
+            
+            divCoche.innerHTML = `
+                <span class="marca">${coche[0].toUpperCase()} ${coche[1]}</span> | 
+                Año: ${coche[2]} | 
+                Precio Rebajado: <span class="precio">${coche[3].toFixed(2)}€</span>
+            `;
+            
+            contenedor.appendChild(divCoche);
+        });
+    </script>
+</body>
+</html>
