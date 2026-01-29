@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Alumnos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: sans-serif;
+        }
+        th {
+            background-color: #0056b3; /* Azul primario */
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #fff4e6; /* Naranja muy clarito al pasar el ratón */
+        }
+        .dni-cell {
+            color: #ff8c00; /* Naranja para resaltar el DNI */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Listado de Alumnos Registrados</h2>
+    <div id="contenedor-tabla"></div>
+
+    <script src="alumnos.js"></script>
+</body>
+</html>
