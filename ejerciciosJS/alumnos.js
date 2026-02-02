@@ -150,53 +150,53 @@ function generarTabla() {
   const contenedor = document.getElementById("contenedor-tabla");
 
   let tablaHTML = `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Fecha_nacimiento</th>
-                            <th>DNI</th>
-                            <th>Telefono</th>
-                            <th>Mail</th>
-                            <th>Notam2</th>
-                            <th>Notam3</th>
-                            <th>Notam4</th>
-                            <th>Notam5</th>
-                            <th>Notam6</th>
-                            <th>Notam9</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>DNI</th>
+                    <th>Teléfono</th>
+                    <th>Mail</th>
+                    <th>Nota M2</th>
+                    <th>Nota M3</th>
+                    <th>Nota M4</th>
+                    <th>Nota M5</th>
+                    <th>Nota M6</th>
+                    <th>Nota M9</th>
+                 </tr>
+            </thead>
+            <tbody>
+    `;
 
-  //Recorrer el JSON y añadir las filas
-  alumnos.forEach(alumno => {
+  for (let i = 0; i < alumnos.length; i++) {
+    let alumno = alumnos[i]; // Accedemos al alumno por su índice
+
     tablaHTML += `
-                    <tr>
-                        <td>${alumno.nombre}</td>
-                        <td>${alumno.apellidos}</td>
-                        <td>${alumno.fecha_de_nacimiento}</td>
-                        <td class="dni-cell">${alumno.dni}</td>
-                        <td>${alumno.telefono}</td>
-                        <td>${alumno.mail}</td>
-                        <td>${alumno.notam2}</td>
-                        <td>${alumno.notam3}</td>
-                        <td>${alumno.notam4}</td>
-                        <td>${alumno.notam5}</td>
-                        <td>${alumno.notam6}</td>
-                        <td>${alumno.notam9}</td>
-                    </tr>
-                `;
-  });
+            <tr>
+                <td>${alumno.nombre}</td>
+                <td>${alumno.apellidos}</td>
+                <td>${alumno.fecha_de_nacimiento}</td>
+                <td class="dni-cell">${alumno.dni}</td>
+                <td>${alumno.telefono}</td>
+                <td>${alumno.mail}</td>
+                <td>${alumno.notam2}</td>
+                <td>${alumno.notam3}</td>
+                <td>${alumno.notam4}</td>
+                <td>${alumno.notam5}</td>
+                <td>${alumno.notam6}</td>
+                <td>${alumno.notam9}</td>
+                <td></td> </tr>
+        `;
+  }
 
   tablaHTML += `
-                    </tbody>
-                </table>
-            `;
+            </tbody>
+        </table>
+    `;
 
-  //tabla en el div
+  // Inyectar la tabla en el div
   contenedor.innerHTML = tablaHTML;
 }
 
