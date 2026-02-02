@@ -141,46 +141,67 @@ const alumnosJSON = `[
     }
   ]`;
 
-//Partiendo del fichero alumnos.js donde tenemos una variable que contiene un JSON, recorrer el JSON y muestra por pantalla, en una tabla, tres de sus propiedades.
 
 // Convertir el JSON String a un Array de Objetos
 const alumnos = JSON.parse(alumnosJSON);
 
 // Crear la tabla
 function generarTabla() {
-    const contenedor = document.getElementById("contenedor-tabla");
+  const contenedor = document.getElementById("contenedor-tabla");
 
-    let tablaHTML = `
+  let tablaHTML = `
                 <table>
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Apellidos</th>
+                            <th>Fecha_nacimiento</th>
                             <th>DNI</th>
+                            <th>Telefono</th>
+                            <th>Mail</th>
+                            <th>Notam2</th>
+                            <th>Notam3</th>
+                            <th>Notam4</th>
+                            <th>Notam5</th>
+                            <th>Notam6</th>
+                            <th>Notam9</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
             `;
 
-    //Recorrer el JSON y añadir las filas
-    alumnos.forEach(alumno => {
-        tablaHTML += `
+  //Recorrer el JSON y añadir las filas
+  alumnos.forEach(alumno => {
+    tablaHTML += `
                     <tr>
                         <td>${alumno.nombre}</td>
                         <td>${alumno.apellidos}</td>
+                        <td>${alumno.fecha_de_nacimiento}</td>
                         <td class="dni-cell">${alumno.dni}</td>
+                        <td>${alumno.telefono}</td>
+                        <td>${alumno.mail}</td>
+                        <td>${alumno.notam2}</td>
+                        <td>${alumno.notam3}</td>
+                        <td>${alumno.notam4}</td>
+                        <td>${alumno.notam5}</td>
+                        <td>${alumno.notam6}</td>
+                        <td>${alumno.notam9}</td>
                     </tr>
                 `;
-    });
+  });
 
-    tablaHTML += `
+  tablaHTML += `
                     </tbody>
                 </table>
             `;
 
-    //tabla en el div
-    contenedor.innerHTML = tablaHTML;
+  //tabla en el div
+  contenedor.innerHTML = tablaHTML;
 }
 
 // Ejecutar la función
 generarTabla();
+
+
+
