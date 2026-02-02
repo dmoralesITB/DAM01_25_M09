@@ -2,37 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tabla de Alumnos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Alumnos</title>
+    <link rel="stylesheet" href="../index.css">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-family: sans-serif;
-        }
-        th {
-            background-color: #0056b3; /* Azul primario */
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        tr:hover {
-            background-color: #fff4e6; /* Naranja muy clarito al pasar el ratón */
-        }
-        .dni-cell {
-            color: #ff8c00; /* Naranja para resaltar el DNI */
-            font-weight: bold;
-        }
+        /* Estilos adicionales para la tabla */
+        .tabla-container { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #007bff; color: white; }
     </style>
 </head>
 <body>
+    <div class="menu-fijo">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Volver al Inicio</a></li>
+            </ul>
+        </nav>
+    </div>
 
-    <h2>Listado de Alumnos Registrados</h2>
-    <div id="contenedor-tabla"></div>
+    <div class="contenido-principal">
+        <div class="tabla-container">
+            <h2>Tabla de Alumnos desde JSON</h2>
+            <div id="contenedor-tabla"></div>
+        </div>
+    </div>
 
     <script src="alumnos.js"></script>
 </body>
