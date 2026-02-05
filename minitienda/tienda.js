@@ -1,11 +1,11 @@
-// 1. Convertimos el JSON a Array
+//JSON a Array
 const productos = JSON.parse(productosJSON);
 
 function init() {
     generarCatalogo();
 }
 
-// 2. Generar el catálogo (estilo bucle for)
+//Generar el catálogo 
 function generarCatalogo() {
     const contenedor = document.getElementById("contenedor-productos");
     let cardsHTML = "";
@@ -54,7 +54,7 @@ function generarCatalogo() {
     contenedor.innerHTML = cardsHTML;
 }
 
-// 3. FUNCIÓN NUEVA: Actualiza el texto del botón en tiempo real
+//Actualiza el texto del botón en tiempo real
 function actualizarPrecioBoton(id, precioBase) {
     const cantidad = document.getElementById(`cantidad-${id}`).value;
     const boton = document.getElementById(`btn-${id}`);
@@ -64,19 +64,6 @@ function actualizarPrecioBoton(id, precioBase) {
     boton.textContent = `Agregar (€${nuevoTotal})`;
 }
 
-// 4. Función para confirmar la compra en el ticket
-function agregarAlTicket(id, nombre, precioBase) {
-    const talla = document.getElementById(`talla-${id}`).value;
-    const cantidad = document.getElementById(`cantidad-${id}`).value;
-    const total = (precioBase * cantidad).toFixed(2);
 
-    const ticket = document.getElementById("detalle-ticket");
-    ticket.innerHTML = `
-        <h4>¡Producto Añadido!</h4>
-        <p><strong>${nombre}</strong></p>
-        <p>Talla: ${talla} | Cantidad: ${cantidad}</p>
-        <p>Total: <strong>${total}€</strong></p>
-    `;
-}
 
 init();
