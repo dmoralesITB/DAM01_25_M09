@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>API REST POKEMON</title>
+   <script src="ejpokemon.js" defer></script>
+</head>
+<body onload="conectarAPI()">
+
+   <h1>Poke-Buscador</h1>
+   
+   <input type="text" id="busqueda" placeholder="Nombre del pokemon...">
+   <button onclick="buscarPokemon()">Buscar</button>
+   <button onclick="conectarAPI()">Cargar 4 iniciales</button>
+
+   <hr>
+
+   <div id="pokemon-container"></div>
+
+</body>
+</html>
