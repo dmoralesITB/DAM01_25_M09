@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba conexión Node</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Ejemplo1: Conexión con servidor Node</h1>
+    <button id="btn">Conectar con servidor</button>
+    <div id="resultado"></div>
+
+
+    <h1>Ejemplo2: Listado de estudiantes</h1>
+    <button id="btnStudents">Cargar estudiantes</button>
+    <div id="resultadoEstudiantes"></div>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", conectar);
+        document.getElementById("btnStudents").addEventListener("click", cargarEstudiantes);
+
+        //Conectamos y nos devuelve un texto
+        async function conectar() {
+            try {
+                const response = await fetch("http://127.0.0.1:3000");
+                if (!response.ok) {
+                    throw new Error("Error HTTP: " + response.status);
+                }
+                //El resultado viene en el campo texto
+                const texto = await response.text();
+                document.getElementById("resultado").textContent = texto;
+
+            } catch (error) {
+                document.getElementById("resultado").textContent = "Error: " + error.message;
+            }
+        }
+
+
+        //Conetamos y nos devuelve un json
+        async function cargarEstudiantes() {
+            try {
+                const response = await fetch("http://localhost:3001/students");
+
+                if (!response.ok) {
+                    throw new Error("Error HTTP: " + response.status);
+                }
+                // Lee el cuerpo y lo parsea automáticamente a objeto JS
+                const students = await response.json();
+                muestraEstudiantes(students);
+
+            } catch (error) {
+                contenedor.innerHTML =
+                    `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+
+
+        function muestraEstudiantes(students) {
+            const contenedor = document.getElementById("resultadoEstudiantes");
+            contenedor.innerHTML = "";
+            students.forEach(student => {
+                const div = document.createElement("div");
+                div.classList.add("student");
+
+                div.innerHTML = `
+                        <strong>ID:</strong> ${student.id}<br>
+                        <strong>Nombre:</strong> ${student.nombre}<br>
+                        <strong>Curso:</strong> ${student.curso}
+                    `;
+
+                contenedor.appendChild(div);
+            });
+        }
+
+
+    </script>
+
+</body>
+
+</html>
+
