@@ -1,7 +1,7 @@
 const { createServer } = require('node:http');
 
-const hostname = '127.0.0.1';
-const port = 3001;
+const hostname = '127.0.0.2';
+const port = 3002;
 
 // Datos simulados --> como si fuera lo que nos devuelve la BDD
 let students = [
@@ -35,7 +35,7 @@ const server = createServer(async (req, res) => {
     // 1. Extraer id de la URL
     const id = req.url.split('/')[2];
     // 2. Buscar alumno en el array
-    const student = students.find(s => s.id === id);
+    const student = students.find(alumno => alumno.id === id);
 
     // 3. Si no existe → 404
     if (!student) {
@@ -46,6 +46,7 @@ const server = createServer(async (req, res) => {
     return sendJson(res, 200, student);
 
   }
+
 
   // TODO 2: DELETE /students/:id
   if (req.method === "DELETE" && req.url.startsWith("/students/")) {
@@ -69,25 +70,25 @@ const server = createServer(async (req, res) => {
   // TODO 3: POST /students
   if (req.method === "POST" && req.url === "/students") {
     try {
-      const alumnoNew = await readBody(req);
+      const alumnoNuevo = await readBody(req);
       // 1. Leer el body con readBody() --> await
 
       // 2. Validar que tenga id, nombre y curso
-      if (!alumnoNew.id || !alumnoNew.nombre || !alumnoNew.curso) {
+      if (!alumnoNuevo.id || !alumnoNuevo.nombre || !alumnoNuevo.curso) {
         return sendJson(res, 400, { message: "Missing required fields: id, nombre, curso" });
       }
 
       // 3. Comprobar que el id no esté repetido
-      const existingStudent = students.find(s => s.id === alumnoNew.id);
+      const existingStudent = students.find(s => s.id === alumnoNuevo.id);
       if (existingStudent) {
-        return sendJson(res, 409, { message: `Student with id ${alumnoNew.id} already exists` });
+        return sendJson(res, 409, { message: `Student with id ${alumnoNuevo.id} already exists` });
       }
 
       // 4. Añadir al array students
-      students.push(alumnoNew);
+      students.push(alumnoNuevo);
 
       // 5. Devolver 201 + alumno creado
-      return sendJson(res, 201, alumnoNew);
+      return sendJson(res, 201, alumnoNuevo);
     } catch (err) {
       //Si hay algún error.
       return sendJson(res, 400, { message: "JSON inválido" });
@@ -105,7 +106,7 @@ const server = createServer(async (req, res) => {
     const studentIndex = students.findIndex(s => s.id === id);
 
     // 3. Si no existe → 404
-    if (studentIndex === -1) {
+    if (studentIndex === before) {
       return sendJson(res, 404, { message: `Student with id ${id} not found` });
     }
 
@@ -146,9 +147,9 @@ Tenemos que montarlo nosotros.*/
 
   req.on("end", () => {
     try {
-      const alumnoNew = JSON.parse(body);
+      const alumnoNuevo = JSON.parse(body);
       //Aquí ya tenemos al alumno.
-      callback(null, alumnoNew);
+      callback(null, alumnoNuevo);
     } catch (err) {
       callback(err);
     }
