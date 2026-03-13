@@ -1,4 +1,5 @@
 import * as studentsService from '../services/students.service.js';
+import * as notasService from '../services/notas.service.js';
 export function getAll(req, res) {
  res.json(studentsService.getAll());
 }
@@ -35,5 +36,14 @@ export function remove(req, res) {
 
  if (!deleted) return res.status(404).json({ message: "Not Found" });
  res.sendStatus(204);
+}
+
+// Related data
+export function getNotes(req, res) {
+ const studentId = req.params.id;
+ const student = studentsService.getById(studentId);
+ if (!student) return res.status(404).json({ message: "Student not found" });
+ const notes = notasService.getByStudentId(studentId);
+ res.json(notes);
 }
 
