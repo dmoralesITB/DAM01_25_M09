@@ -1,4 +1,7 @@
-import { notas, nextId } from '../data/notas.js';
+import { notas } from '../data/notas.js';
+
+// counter for new note IDs (kept in service rather than mutating import)
+let nextId = 3;
 import * as studentsService from './students.service.js';
 
 function validateNota(obj) {
