@@ -1,43 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="ca">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Ejercicios de Clase</title>
-    <link rel="stylesheet" href="tiendastyle.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeeLab - Tu tienda de camisetas</title>
+  <link rel="stylesheet" href="tiendastyle.css" />
 </head>
+<body onload="init()">
 
-<body>
+  <header>TeeLab · Tu tienda de camisetas</header>
 
-    <header class="menu-fijo">
-        <nav>
-            <ul>
-                <li><a href="../index.html">Volver al Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
+  <section id="contenedor-productos"></section>
 
-    <main class="contenido-principal">
-        <h1>TeeLab</h1>
-        <section class="seccion-cards">
-            <div id="contenedor-productos" class="contenedor-cards">
-            </div>
-        </section>
-    </main>
+  <section id="ticket-section">
+    <h2>🛒 Carrito</h2>
+    <p id="ticket-vacio">El carrito está vacío.</p>
+    <ul id="ticket-lista"></ul>
+    <div id="ticket-total"></div>
+    <div class="ticket-acciones" id="ticket-acciones" style="display:none">
+      <button class="btn-vaciar" id="btn-vaciar">Vaciar carrito</button>
+      <button class="btn-confirmar" id="btn-confirmar">Confirmar pedido</button>
+    </div>
+  </section>
 
-    <footer class="footer-contacto">
-        <div class="footer-contenido">
-            <h4>TeeLab - Ticket</h4>
-            <div id="detalle-ticket">
-                <p>Tu selección aparecerá aquí.</p>
-            </div>
-        </div>
-    </footer>
+  <div id="toast"></div>
 
-    <script src="productos.js"></script>
-    <script src="tienda.js" defer></script>
-
+  <script src="tienda.js"></script>
 </body>
-
 </html>
