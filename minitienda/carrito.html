@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeeLab - Carrito</title>
+  <link rel="stylesheet" href="tiendastyle.css" />
+</head>
+<body onload="init()">
+
+  <header>
+    <a href="minitienda.html">← Volver a la tienda</a>
+    TeeLab · Carrito
+  </header>
+
+  <section id="ticket-section">
+    <h2>🛒 Carrito</h2>
+    <p id="ticket-vacio">El carrito está vacío.</p>
+    <ul id="ticket-lista"></ul>
+    <div id="ticket-total"></div>
+    <div class="ticket-acciones" id="ticket-acciones" style="display:none">
+      <button class="btn-vaciar" id="btn-vaciar">Vaciar carrito</button>
+      <button class="btn-confirmar" id="btn-confirmar">Confirmar pedido</button>
+    </div>
+  </section>
+
+  <div id="toast"></div>
+
+  <script src="tienda.js"></script>
+</body>
+</html>

@@ -16,6 +16,21 @@ const seleccion = {};
 // Carrito: array de { id, nombre, talla, color, cantidad, precio, subtotal }
 const carrito = [];
 
+// ──────────────────────────────────────────────────────────────
+// LocalStorage para el carrito
+// ──────────────────────────────────────────────────────────────
+function saveCart() {
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function loadCart() {
+  const stored = localStorage.getItem('carrito');
+  if (stored) {
+    carrito.length = 0;
+    carrito.push(...JSON.parse(stored));
+  }
+}
+
 // Colores CSS para los círculos
 const COLOR_MAP = {
   blanco:  "#f5f5f5",
@@ -31,9 +46,20 @@ const COLOR_MAP = {
 // Init
 // ──────────────────────────────────────────────────────────────
 function init() {
-  generarCatalogo();
-  document.getElementById("btn-vaciar").addEventListener("click", vaciarCarrito);
-  document.getElementById("btn-confirmar").addEventListener("click", confirmarPedido);
+  loadCart();
+  if (document.getElementById("contenedor-productos")) {
+    // Página de tienda
+    generarCatalogo();
+    document.getElementById("btn-ver-carrito").addEventListener("click", () => window.location.href = "carrito.html");
+  } else {
+    // Página de carrito
+    renderTicket();
+  }
+  // Listeners comunes
+  const btnVaciar = document.getElementById("btn-vaciar");
+  if (btnVaciar) btnVaciar.addEventListener("click", vaciarCarrito);
+  const btnConfirmar = document.getElementById("btn-confirmar");
+  if (btnConfirmar) btnConfirmar.addEventListener("click", confirmarPedido);
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -255,17 +281,19 @@ function agregarAlCarrito(prod) {
     subtotal: parseFloat((prod.precioBase * cantidad).toFixed(2)),
   };
   carrito.push(item);
-  renderTicket();
+  saveCart();
   mostrarToast(`✓ ${prod.nombre} añadida al carrito`);
 }
 
 function vaciarCarrito() {
   carrito.length = 0;
+  saveCart();
   renderTicket();
 }
 
 function quitarLineaCarrito(index) {
   carrito.splice(index, 1);
+  saveCart();
   renderTicket();
 }
 
@@ -325,6 +353,7 @@ function confirmarPedido() {
   const total = carrito.reduce((acc, item) => acc + item.subtotal, 0);
   mostrarToast(`🎉 Pedido confirmado · Total: ${total.toFixed(2)}€`);
   carrito.length = 0;
+  saveCart();
   renderTicket();
 }
 
